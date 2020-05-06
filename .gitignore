@@ -1,0 +1,14 @@
+# Files from Compiling.
+bin/*
+
+# Files from Vim.
+*.swp
+*.vim
+
+# Files from Visual Studio Code.
+.vscode/*
+*.code-workspace
+
+# General Files to Ignore on Linux Systems.
+.fuse_hidden*
+
