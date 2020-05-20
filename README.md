@@ -39,7 +39,7 @@ libpcap is available in
 [Ubuntu's Package Repositories](https://packages.ubuntu.com/search?keywords=libpcap-dev).
 
 
-## Installation
+## Direct Installation
 On Ubuntu:
 ```bash
 sudo apt update
@@ -57,6 +57,38 @@ For a more "global installation" do one of the following:
 - Add the path to the binary to the `$PATH` environment variable (recommended).
 - Copy the binary to `/usr/bin` (not recommended).
 - Create a soft link to the binary with `ln -s`.
+
+
+## Run as a Docker Container
+This is recommended over running directly since it handles dependencies and permissions for you.
+Now you don't have to worry about running someone else's code as root on your host system
+(see **Usage** for why you need to run as root otherwise).  
+
+1. **Step 1:** Build the image.  
+   - Method 1: Directly use the image from dockerhub.
+     ```bash
+     docker pull hypro999/synflood.c
+     ```
+
+   - Method 2: Build the image yourself from source.
+     ```bash
+     docker build -t hypro999/synflood.c:latest .
+     ```
+
+- **Step 2:** Run the tool in a container.
+```bash
+docker run --rm hypro999/synflood.c -h example.com -p 80 -t 1 -v
+```
+If you use this tool often (even though it's more for demonstration than to
+actually attack with) then you might want to add an alias to your bashrc.
+```bash
+echo "alias synflood=\"docker run --rm hypro999/synflood.c\"" >> ~/.bashrc
+```
+Now reload your bashrc file (using `source ~/.bashrc`) and you can directly run:
+```bash
+synflood -h example.com -p 80 -t 1 -v
+```
+
 
 ## Usage
 This binary needs to be run as a superuser. This is because to craft and send
@@ -110,4 +142,3 @@ Optional parameters:
     not take into consideration special or reserved addresses. It's
     completely random.
 ```
-
