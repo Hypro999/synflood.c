@@ -158,7 +158,7 @@ main (int argc, char *argv[], char *envp[])
    * that this process will fork (this process included) on encountering
    * a critical error. */
   if (setpgid(0, 0) == -1)
-    die("%d: %s", __LINE__ - 1, strerror(errno));
+    die("%d: %s\n", __LINE__ - 1, strerror(errno));
 
   /* Parse the command line arguments. */
   pid_t pid;
@@ -179,7 +179,7 @@ main (int argc, char *argv[], char *envp[])
   spoofing:               %s\n\
   own address:            %s\n",
        hostname, inet_ntoa(host_addr.sin_addr), port, attack_time,
-       attack_time == 1 ? "second" : "seconds", enable_sniffer ? "disabled" : "enabled",
+       attack_time == 1 ? "second" : "seconds", enable_sniffer ? "enabled" : "disabled",
        enable_spoofing ? "enabled" : "disabled", current_ipv4_addr_buf);
 
   if (enable_sniffer) {
